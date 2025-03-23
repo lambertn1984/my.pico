@@ -12,7 +12,7 @@ from bh1750 import BH1750
 ssid = 'berlin' #Your network name
 password = '8pbn-4vrq-qa4e' #Your WiFi password
 
-#initialize I2C 
+#initialize I2C
 #DEL
 led = machine.Pin("LED", machine.Pin.OUT)
 
@@ -25,6 +25,12 @@ bh1750 = BH1750(0x23, i2c0)
 
 
 def connect():
+    """
+    Connects the Raspberry Pi Pico W to the specified Wi-Fi network.
+
+    Returns:
+        str: The IP address assigned to the Pico W.
+    """
     #Connect to WLAN
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
@@ -37,6 +43,15 @@ def connect():
     return ip
 
 def open_socket(ip):
+    """
+    Opens a socket for network communication on the given IP address.
+
+    Args:
+        ip (str): The IP address to bind the socket to.
+
+    Returns:
+        socket.socket: The opened socket object.
+    """
     # Open a socket
     address = (ip, 80)
     connection = socket.socket()
@@ -45,6 +60,18 @@ def open_socket(ip):
     return connection
 
 def webpage(temp, pressure, humidity, light):
+    """
+    Generates an HTML webpage displaying the sensor readings.
+
+    Args:
+        temp (str): Temperature reading.
+        pressure (str): Pressure reading.
+        humidity (str): Humidity reading.
+        light (int): Light intensity reading.
+
+    Returns:
+        str: The HTML content of the webpage.
+    """
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -94,10 +121,16 @@ def webpage(temp, pressure, humidity, light):
     </html>
     """
     return str(html)
-  
+
 def serve(connection):
+    """
+    Starts a web server that serves the sensor readings on a webpage.
+
+    Args:
+        connection (socket.socket): The socket connection to serve.
+    """
     #Start a web server
-    
+
     while True:
         led.value(0)
         bme = bme280.BME280(i2c=i2c1)
@@ -113,5 +146,3 @@ def serve(connection):
         client.close()
         sleep(1)  # Pause between repetitions (adjust as needed)
         led.value(1)
-    
-    
