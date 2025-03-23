@@ -17,10 +17,10 @@ password = '8pbn-4vrq-qa4e' #Your WiFi password
 led = machine.Pin("LED", machine.Pin.OUT)
 
 # temp., press., hum.
-i2c1 = SoftI2C(scl=Pin(1), sda=Pin(0), freq=400000)
-bme = bme280.BME280(i2c=i2c1)  # Initialize BME280 outside the loop
+i2c1 = SoftI2C(scl=Pin(13), sda=Pin(12), freq=400000)
+bme = bme280.BME280(i2c=i2c1) # Initialize BME280 outside the loop
 # light
-i2c0 = SoftI2C(sda=Pin(8), scl=Pin(9))
+i2c0 = SoftI2C(sda=Pin(14), scl=Pin(15))
 bh1750 = BH1750(0x23, i2c0)
 
 
