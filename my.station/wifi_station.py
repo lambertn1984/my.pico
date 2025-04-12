@@ -61,7 +61,7 @@ def open_socket(ip):
 
 def webpage(temp, pressure, humidity, light):
     """
-    Generates an HTML webpage displaying the sensor readings.
+    Generates an HTML webpage displaying the sensor readings and an image.
 
     Args:
         temp (str): Temperature reading.
@@ -81,7 +81,7 @@ def webpage(temp, pressure, humidity, light):
     <style>
         body {{
             font-family: sans-serif;
-            background-color: #f0f0f0; /* Light gray background */
+            background-color: #f0f0f0;
         }}
         .container {{
             width: 80%;
@@ -93,18 +93,18 @@ def webpage(temp, pressure, humidity, light):
         }}
         h1 {{
             text-align: center;
-            color: #333; /* Darker text color */
+            color: #333;
         }}
         .reading {{
-            font-size: 2em; /* Larger font size */
+            font-size: 2em;
             margin-bottom: 10px;
         }}
         .image {{
-            text-align: center; /* Center the image */
+            text-align: center;
             margin-top: 20px;
         }}
         .image img {{
-            max-width: 100px; /* Limit image width */
+            max-width: 100px;
             height: auto;
         }}
     </style>
@@ -116,6 +116,9 @@ def webpage(temp, pressure, humidity, light):
         <div class="reading">Pressure: {pressure}</div>
         <div class="reading">Humidity: {humidity}</div>
         <div class="reading">Light: {light}</div>
+        <div class="image">
+            <img src="weather_icon.png" alt="Weather Icon">
+        </div>
     </div>
     </body>
     </html>
